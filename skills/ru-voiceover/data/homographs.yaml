@@ -1,0 +1,161 @@
+# Homograph overrides for Russian TTS (ru-voiceover skill).
+#
+# prepare.py flags EVERY occurrence of a form listed here. If silero-stress (which
+# has its own context homograph resolver) chose one of the variants, its choice is
+# kept; hints that disagree are shown in the flag. Otherwise prepare.py picks a sense
+# by context hints found in the same sentence (closer words weigh more):
+#   - a hint is a word prefix: «двер» matches «двери», «дверью»;
+#   - a hint of 1–3 letters must match the whole word («по», «ли», «нет»);
+#   - a hint starting with '-' is a suffix: «-ть» matches infinitives.
+# Tie or no hint -> `default` sense if set, else flagged «AMBIGUOUS».
+# The author can always force a variant in the source text with '+' or U+0301 (зам+ок / замо́к) – manual marks win over everything.
+# '+' goes before the stressed vowel; one-vowel forms carry no mark (все / всё).
+
+version: 1
+
+groups:
+  - group: замок
+    senses:
+      lock: [двер, ключ, висяч, кодов, сломан, повес, открыт, закрыт, ворот, сейф, щелкн]
+      castle: [старо, старин, старый, старая, рыцар, корол, башн, крепост, средневек, песочн, принцесс, дворц, замков]
+    forms:
+      замок: {lock: зам+ок, castle: з+амок}
+      замка: {lock: замк+а, castle: з+амка}
+      замку: {lock: замк+у, castle: з+амку}
+      замком: {lock: замк+ом, castle: з+амком}
+      замке: {lock: замк+е, castle: з+амке}
+      замки: {lock: замк+и, castle: з+амки}
+      замков: {lock: замк+ов, castle: з+амков}
+
+  - group: все/всё
+    senses:
+      everyone: [знают, знаем, люди, они, мы, вы, были, хотят, говорят, думают, участник, вместе, пришли, подписчик, аккаунт, конкурент]
+      everything: [будет, равно, хорошо, ещё, понятно, готово, получится, просто, сразу, нормально, остальное, сделано]
+    forms:
+      все: {everyone: все, everything: всё}
+      всё: {everyone: все, everything: всё}
+
+  - group: мука
+    senses:
+      flour: [торт, тесто, пшенич, печ, блин, хлеб, сахар, купи, килограм, ржан, мешок, просе]
+      torment: [ожидан, адск, творч, страдан, сплошн, выбор, настоящ]
+    forms:
+      мука: {flour: мук+а, torment: м+ука}
+      муку: {flour: мук+у, torment: м+уку}
+      муки: {flour: мук+и, torment: м+уки}
+      мукой: {flour: мук+ой, torment: м+укой}
+
+  - group: атлас
+    senses:
+      maps: [карта, карты, карте, карту, картами, географ, мир, звёзд, звезд, анатом, дорог, страниц]
+      fabric: [ткан, плать, ленточ, шёлк, шелк, блестящ, сшит, гладк]
+    forms:
+      атлас: {maps: +атлас, fabric: атл+ас}
+      атласа: {maps: +атласа, fabric: атл+аса}
+      атласе: {maps: +атласе, fabric: атл+асе}
+
+  - group: дорога
+    default: road
+    senses:
+      road: [по, прям, длинн, домой, впереди, ведёт, ведет, шоссе, асфальт]
+      dear: [мне, очень, так, память, сердц, как]
+    forms:
+      дорога: {road: дор+ога, dear: д+орога}
+
+  - group: стоит
+    senses:
+      worth: [-ть, -ться, рубл, денег, доллар, сколько, ли, кредит, тариф, дорого, дёшево, дешево]
+      stands: [стол, углу, возле, рядом, дом, машин, полк, стен, памятник]
+    forms:
+      стоит: {worth: ст+оит, stands: сто+ит}
+      стоят: {worth: ст+оят, stands: сто+ят}
+
+  - group: уже
+    default: already
+    senses:
+      already: [есть, готов, сделал, знаешь, набира]
+      narrower: [чем, стал, гораздо, намного, немного]
+    forms:
+      уже: {already: уж+е, narrower: +уже}
+
+  - group: плачу
+    senses:
+      pay: [рубл, деньг, налог, карт, счёт, счет, подписк, тариф, кредит]
+      cry: [слез, горьк, грустн, навзрыд]
+    forms:
+      плачу: {pay: плач+у, cry: пл+ачу}
+
+  - group: хлопок
+    default: cotton
+    senses:
+      cotton: [ткан, футболк, натурал, одежд, комбинезон, бодик, состав, процент, мягк]
+      clap: [громк, ладош, хлопнул, раздал, услыш]
+    forms:
+      хлопок: {cotton: хл+опок, clap: хлоп+ок}
+      хлопка: {cotton: хл+опка, clap: хлопк+а}
+
+  - group: белки
+    senses:
+      proteins: [жир, углевод, питан, грамм, бжу, калор]
+      squirrels: [лес, лесу, лесн, орех, дупл, рыж, пушист, парк]
+    forms:
+      белки: {proteins: белк+и, squirrels: б+елки}
+
+  - group: полки
+    default: shelves
+    senses:
+      shelves: [книж, шкаф, стен, магазин, витрин]
+      regiments: [арми, войск, солдат, генерал, наступ]
+    forms:
+      полки: {shelves: п+олки, regiments: полк+и}
+
+  - group: дома
+    default: at_home
+    senses:
+      at_home: [сижу, сидит, работа, остал, никого, вечером, был]
+      houses: [многоэтаж, строит, строят, постро, кирпич, высок, новые, жилые, эти, улиц]
+    forms:
+      дома: {at_home: д+ома, houses: дом+а}
+
+  - group: голоса
+    senses:
+      plural: [разные, все, эти, библиотек, мужские, женские, русские, несколько, выбрать, готовые, сравни]
+      genitive: [нет, без, тембр, звук, тон, высот, для, клон, своего, моего, твоего, этого, нового]
+    forms:
+      голоса: {plural: голос+а, genitive: г+олоса}
+
+  - group: слова
+    senses:
+      plural: [эти, ключев, все, нужн, мои, такие, разные, по, запрещ, стоп]
+      genitive: [одного, ни, без, значени, смысл, нового, этого, кроме]
+    forms:
+      слова: {plural: слов+а, genitive: сл+ова}
+
+  - group: цены
+    senses:
+      plural: [наши, все, эти, тариф, новые, низкие, высокие, сравни]
+      genitive: [без, для, выше, ниже, нет, повышени, снижени, половин]
+    forms:
+      цены: {plural: ц+ены, genitive: цен+ы}
+
+  - group: сорок
+    default: forty
+    senses:
+      forty: [лет, минут, секунд, процент, аккаунт, штук, тысяч, рублей]
+      magpies: [стая, птиц, белобок]
+    forms:
+      сорок: {forty: с+орок, magpies: сор+ок}
+
+  - group: узнаю
+    senses:
+      will_find_out: [завтра, потом, скоро, когда, обязательно, сначала, как]
+      recognize: [сразу, лицо, голос, почерк, всегда, издалека]
+    forms:
+      узнаю: {will_find_out: узн+аю, recognize: узна+ю}
+
+  - group: кружки
+    senses:
+      mugs: [чай, кофе, керамич, налей, чашк, посуд]
+      circles: [школ, детск, рисова, шахмат, секци, кружочк]
+    forms:
+      кружки: {mugs: кр+ужки, circles: кружк+и}

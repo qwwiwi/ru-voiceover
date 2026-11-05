@@ -1,0 +1,186 @@
+# Pronunciation glossary for Russian TTS (ru-voiceover skill).
+#
+# '+' goes right BEFORE the stressed vowel; prepare.py converts it to U+0301.
+# No '+' on one-vowel words and never before «ё» (ё is always stressed).
+#
+# status:
+#   ok                    – agreed, use as is
+#   check_by_ear          – plausible, confirm on the first generation
+#   needs_owner_decision  – the user has to choose; prepare.py flags every use
+#
+# terms: Latin / brand spellings -> spoken Cyrillic. Whole-word, case-sensitive,
+#        longest match first. Applied BEFORE the stress model. `ipa` is optional and
+#        only used by dict.py --phoneme (eleven_v4 phoneme rules, untested for ru).
+# words: Cyrillic word forms -> forced stress, applied AFTER the stress model.
+#        A key ending in '*' is a stem: it matches any word starting with it and the
+#        ending is kept unstressed (use only where the stress never moves).
+
+version: 1
+
+terms:
+  - src: [Claude Code]
+    say: Клод Код
+    status: ok
+  - src: [Claude Desktop]
+    say: Клод Д+есктоп
+    status: ok
+  - src: [Claude]
+    say: Клод
+    ipa: klot
+    status: ok
+    note: as the Russian community says it; does not decline in TTS text («к Клоду» – write it in Cyrillic in the script)
+
+  - src: [Codex]
+    say: К+одекс
+    ipa: ˈkodʲɪks
+    status: ok
+  - src: [ChatGPT]
+    say: Чат джи-пи-т+и
+    status: ok
+
+  - src: [MCP]
+    say: эм-си-п+и
+    ipa: ɛm sʲi ˈpʲi
+    status: ok
+  - src: [API]
+    say: эй-пи-+ай
+    ipa: ɛj pʲi ˈaj
+    status: ok
+    note: colloquial «апи́» is also common; spelled-out is clearer in lessons
+  - src: [AI]
+    say: эй-+ай
+    status: ok
+    note: Russian «ИИ» is fine as is
+  - src: [CSV]
+    say: си-эс-в+и
+    status: ok
+  - src: [TTS]
+    say: ти-ти-+эс
+    status: check_by_ear
+
+  - src: [Instagram]
+    say: Инстагр+ам
+    ipa: ɪnstɐˈgram
+    status: ok
+  - src: [Reels, reels]
+    say: рилс+ы
+    status: ok
+    note: stress on the ending, рилсы́ (colloquial «ри́лсы» also exists – change here and in `words:` if you prefer it); if the case breaks the sentence, rewrite in Cyrillic («в рилса́х»)
+  - src: [Telegram]
+    say: Телегр+ам
+    status: ok
+  - src: [GitHub, Github]
+    say: Гитх+аб
+    status: ok
+  - src: [YouTube]
+    say: Ют+уб
+    status: ok
+  - src: [ElevenLabs, Eleven Labs]
+    say: Ил+евен Лабс
+    status: check_by_ear
+    note: alternative «Иле́вен Лэ́бс»
+  - src: [prompt, Prompt]
+    say: промпт
+    status: ok
+  - src: [deploy, Deploy]
+    say: депл+ой
+    status: ok
+  - src: [Lite]
+    say: Лайт
+    status: ok
+  - src: [Premium]
+    say: Пр+емиум
+    status: ok
+
+words:
+  рилсы: рилс+ы
+  рилсов: рилс+ов
+  рилсам: рилс+ам
+  рилсами: рилс+ами
+  рилсах: рилс+ах
+  рилса: рилс+а
+  рилсу: рилс+у
+  рилсом: рилс+ом
+  рилсе: рилс+е
+  хештег*:
+    say: хэшт+эг*
+    status: needs_owner_decision
+    note: spell with Э in TTS text – «хэштэги»; stress хэштэ́г (default) vs хэ́штэг – confirm with the user
+  хэштег*:
+    say: хэшт+эг*
+    status: needs_owner_decision
+    note: same as хештег*
+  хештэг*:
+    say: хэшт+эг*
+    status: needs_owner_decision
+    note: same as хештег*
+  тег*:
+    say: т+эг*
+    status: ok
+    note: «тэги», hard Т; stress on stem in all forms
+  промпт*: пр+омпт*
+  деплой*: депл+ой*
+  инстаграм*: инстагр+ам*
+  телеграм*: телегр+ам*
+  гитхаб*: гитх+аб*
+  кодекс*: к+одекс*
+  двести: дв+ести  # silero gave «двести́» after «сто–»
+  включим:
+    say: вкл+ючим
+    status: check_by_ear
+    note: colloquial вклю́чим; the dictionary norm is включи́м – delete this rule if you want the norm
+  # --- hard Э in loanwords: references/e-vs-e-loanwords.md (gramota.ru dictionaries, 25.10) ---
+  # high confidence ([э] in 3-7 dictionaries)
+  тест: т+эст
+  теста: т+эста
+  тесту: т+эсту
+  тестом: т+эстом
+  тесте: т+эсте
+  тесты: т+эсты
+  тестов: т+эстов
+  тестам: т+эстам
+  тестами: т+эстами
+  тестах: т+эстах
+  интернет*: интэрн+эт*
+  модель: мод+эль
+  модели: мод+эли
+  моделей: мод+элей
+  моделям: мод+элям
+  моделями: мод+элями
+  моделях: мод+элях
+  моделью: мод+элью
+  компьютер*: компь+ютэр*
+  бренд*: бр+энд*
+  тренд*: тр+энд*
+  контент*: конт+энт*
+  бизнес: б+изнэс
+  бизнеса: б+изнэса
+  бизнесу: б+изнэсу
+  бизнесом: б+изнэсом
+  бизнесе: б+изнэсе
+  бизнесы: б+изнэсы
+  бизнесов: б+изнэсов
+  проект: про+экт
+  проекта: про+экта
+  проекту: про+экту
+  проектом: про+эктом
+  проекте: про+экте
+  проекты: про+экты
+  проектов: про+эктов
+  проектам: про+эктам
+  проектами: про+эктами
+  проектах: про+эктах
+  # medium confidence (dictionaries vary; hard form is current in business speech)
+  менеджер*:
+    say: м+енэджер*
+    status: check_by_ear
+  менеджмент*:
+    say: м+енэджмент*
+    status: check_by_ear
+  дедлайн*:
+    say: дэдл+айн*
+    status: check_by_ear
+  интерфейс*:
+    say: интэрф+ейс*
+    status: check_by_ear
+  # kept soft on purpose (dictionaries): маркетинг, контекст, агент, кейс; сервер/сервис – both allowed
